@@ -1,4 +1,4 @@
-
+(load-file "~/.emacs.d/themes/cyberpunk-theme.el")
 (defun pkg-init ()
   (require 'package)
   (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -23,11 +23,13 @@
 (install 'helm)
 (helm-mode 1)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+(define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") #'helm-select-action)
 
 (install 'projectile)
 (projectile-mode +1)
-(define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
-
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (install 'ibuffer-projectile)
 (install 'ag)
 (install 'ggtags)
@@ -53,7 +55,6 @@
       ;; timeout exceeded
       (insert initial-key))))
 (define-key evil-insert-state-map (kbd "s") 'my-sd)
-
 (defun linum-init ()
   (require 'linum-relative)
   (global-linum-mode 1)
@@ -85,7 +86,9 @@
 	      (tool-bar-lines . 0)
 	      (width . 106)
 	      (height . 60)
-	      (background-color . "black")
+	      (background-color . "#150f1c")
+	      (background-mode "dark")
+	      (foreground-color . "#E0DFDB")
 	      (left . 50)
 	      (top . 50)))
     (setq initial-frame-alist '( (tool-bar-lines . 0))))

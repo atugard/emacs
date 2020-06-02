@@ -63,7 +63,7 @@ T - tag prefix
 (define-key evil-normal-state-map (kbd "SPC") 'hydra-launcher/body)
 
 
-(eval-after-load "dired" '(progn (define-key dired-mode-map "." 'hydra-dired/body)))
+(define-key dired-mode-map "." 'hydra-dired/body)
 
 
 

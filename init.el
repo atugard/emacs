@@ -80,6 +80,7 @@
       (setq initial-frame-alist
 	    '(
 	      (font . "iosevka")
+	      (alpha . 90)
 	      (menu-bar-lines . 0)
 	      (tool-bar-lines . 0)
 	      (width . 106)

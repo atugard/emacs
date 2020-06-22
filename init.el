@@ -1,5 +1,7 @@
 (load-file "~/.emacs.d/themes/dunno.el")
 
+
+;;=================definitions=================
 (defun pkg-init ()
   (require 'package)
   (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -80,8 +82,14 @@
   (define-key helm-map (kbd "C-z") #'helm-select-action)
   (define-key evil-insert-state-map (kbd "s") 'my-sd)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (define-key evil-insert-state-map (kbd "TAB") 'dabbrev-completion)
-  (global-set-key (kbd "M-x") 'helm-M-x))
+  (define-key evil-insert-state-map (kbd "TAB") 'dabbrev-expand)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-h")  'windmove-left)
+  (global-set-key (kbd "C-l") 'windmove-right)
+  (global-set-key (kbd "C-k")    'windmove-up)
+  (global-set-key (kbd "C-j")  'windmove-down)
+  (global-set-key (kbd "C-S-k") 'enlarge-window)
+  (global-set-key (kbd "C-S-j") 'shrink-window))
 
 (defun graphics ()
   (if (display-graphic-p)
@@ -97,13 +105,21 @@
 	      (top . 50)))
     (setq initial-frame-alist '( (tool-bar-lines . 0))))
   (setq default-frame-alist initial-frame-alist))
-
+(defun add-pretty-lambda ()
+  (setq prettify-symbols-alist
+	'(
+	  ("lambda" . 955) ; λ
+	  ("->" . 8594)    ; →
+	  ("=>" . 8658)    ; ⇒
+	  ("map" . 8614)    ; ↦
+	  )))
 (defun hooks ()
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode))
-
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-hook 'racket-mode-hook 'add-pretty-lambda))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
+  
   (ac-config-default)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (show-paren-mode 1)
@@ -113,18 +129,62 @@
   (projectile-mode +1)
   (evil-mode 1)
   (helm-mode 1)
+  (desktop-save-mode 1)
   ;;Scroll one line at a time
-  (setq scroll-step 1))
+  (setq scroll-step 1)
+  (global-prettify-symbols-mode 1))
 
-
+;;=================init=================
 (pkg-init)
-(install-packages '(evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets))
+(install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets))
 (custom)
 (keys)
 (graphics)
 (hooks)
+(linum-init)
 (misc-options)
 
-;;Load hydras
+;;=================load hydras=================
 (load-file "./.emacs.d/hydras/hydras.el")
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#484e54" "#f11235" "#02d849" "#ffb627" "#00a6fb" "#e834f9" "#1de9b6" "#f8f8f2"])
+ '(custom-enabled-themes nil)
+ '(custom-safe-themes
+   (quote
+    ("e4b0b3402412fa850ae8575e761a5f8b02a1c108fb2359ab4f4977537bb64531" "2679db166117d5b26b22a8f12a940f5ac415d76b004de03fcd34483505705f62" "8ca8fbaeaeff06ac803d7c42de1430b9765d22a439efc45b5ac572c2d9d09b16" default)))
+ '(hl-todo-keyword-faces
+   (quote
+    (("TODO" . "#e834f9")
+     ("NEXT" . "#e834f9")
+     ("THEM" . "#0ed1d1")
+     ("PROG" . "#1de9b6")
+     ("OKAY" . "#00a6fb")
+     ("DONT" . "#ff9505")
+     ("FAIL" . "#f11235")
+     ("DONE" . "#02d849")
+     ("NOTE" . "#ffb627")
+     ("KLUDGE" . "#fb6107")
+     ("HACK" . "#a359fe")
+     ("TEMP" . "#c0c0bd")
+     ("FIXME" . "#e834f9")
+     ("XXX" . "#0ed1d1")
+     ("XXXX" . "#0ed1d1")
+     ("\\?\\?\\?+" . "#0ed1d1"))))
+ '(package-selected-packages
+   (quote
+    (racket-mode typescript-mode humanoid-themes linum-relative evil)))
+ '(pdf-view-midnight-colors (quote ("#f8f8f2" . "#232629"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

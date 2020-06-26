@@ -52,7 +52,7 @@ T - tag prefix
 
 (defhydra hydra-launcher (:color blue)
    "Launch"
-   ("b" buffer-menu "buffer")
+   ("b" ibuffer "buffer")
    ("d" dired "dired")
    ("f" find-file-at-point "find file")
    ("l" load-file "load file")

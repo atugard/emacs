@@ -77,6 +77,8 @@
   (custom-set-faces))
 
 (defun keys ()
+  (evil-define-key 'normal ibuffer-mode-map
+    (kbd "l") 'ibuffer-visit-buffer)
   (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z") #'helm-select-action)
@@ -119,7 +121,7 @@
   (add-hook 'racket-mode-hook 'add-pretty-lambda))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
-  
+  (evil-set-initial-state 'ibuffer-mode 'normal) 
   (ac-config-default)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (show-paren-mode 1)

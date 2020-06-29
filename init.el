@@ -79,6 +79,8 @@
 (defun keys ()
   (evil-define-key 'normal ibuffer-mode-map
     (kbd "l") 'ibuffer-visit-buffer)
+  (evil-define-key 'normal bookmark-bmenu-mode-map
+    (kbd "l") 'bookmark-bmenu-select)
   (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z") #'helm-select-action)
@@ -122,6 +124,7 @@
 (defun misc-options ()
   (setq inhibit-startup-screen t)
   (evil-set-initial-state 'ibuffer-mode 'normal) 
+  (evil-set-initial-state 'bookmark-bmenu-mode 'normal) 
   (ac-config-default)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (show-paren-mode 1)

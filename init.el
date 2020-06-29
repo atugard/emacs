@@ -81,6 +81,10 @@
     (kbd "l") 'ibuffer-visit-buffer)
   (evil-define-key 'normal bookmark-bmenu-mode-map
     (kbd "l") 'bookmark-bmenu-select)
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory)
+  (evil-define-key 'normal dired-mode-map
+    (kbd "l") 'dired-find-file)
   (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z") #'helm-select-action)

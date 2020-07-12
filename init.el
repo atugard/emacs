@@ -1,6 +1,7 @@
 (load-file "~/.emacs.d/themes/dunno.el")
 
 
+
 ;;=================definitions=================
 (defun pkg-init ()
   (require 'package)
@@ -85,6 +86,10 @@
     (kbd "h") 'dired-up-directory)
   (evil-define-key 'normal dired-mode-map
     (kbd "l") 'dired-find-file)
+  (evil-define-key 'normal pdf-tools-mode-map
+    (kbd "j") 'pdf-view-next-line-or-next-page)
+  (evil-define-key 'normal pdf-tools-mode-map
+    (kbd "k") 'pdf-view-previous-line-or-previous-page)
   (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z") #'helm-select-action)
@@ -124,11 +129,13 @@
 (defun hooks ()
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-  (add-hook 'racket-mode-hook 'add-pretty-lambda))
+  (add-hook 'racket-mode-hook 'add-pretty-lambda)
+  (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1))))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
   (evil-set-initial-state 'ibuffer-mode 'normal) 
   (evil-set-initial-state 'bookmark-bmenu-mode 'normal) 
+  (evil-set-initial-state 'pdf-tools-mode 'normal) 
   (ac-config-default)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (show-paren-mode 1)
@@ -139,13 +146,14 @@
   (evil-mode 1)
   (helm-mode 1)
   (desktop-save-mode 1)
+  (pdf-tools-install)
   ;;Scroll one line at a time
   (setq scroll-step 1)
   (global-prettify-symbols-mode 1))
 
 ;;=================init=================
 (pkg-init)
-(install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets))
+(install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets tablist pdf-tools))
 (custom)
 (keys)
 (graphics)
@@ -189,7 +197,7 @@
      ("\\?\\?\\?+" . "#0ed1d1"))))
  '(package-selected-packages
    (quote
-    (racket-mode typescript-mode humanoid-themes linum-relative evil)))
+    (pdf-tools typescript-mode humanoid-themes linum-relative evil)))
  '(pdf-view-midnight-colors (quote ("#f8f8f2" . "#232629"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

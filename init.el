@@ -1,4 +1,4 @@
-(load-file "~/.emacs.d/themes/dunno.el")
+(load-file "~/.emacs.d/themes/hello.el")
 
 
 

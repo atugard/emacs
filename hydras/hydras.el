@@ -62,6 +62,6 @@ T - tag prefix
    ("RET" bookmark-bmenu-list "bookmark-list")
    ("SPC" nil "toggle-hydra"))
 (define-key evil-normal-state-map (kbd "SPC") 'hydra-launcher/body)
-(define-key dired-mode-map "." 'hydra-dired/body)
+(define-key dired-mode-map (kbd "SPC") 'hydra-dired/body)
 
 

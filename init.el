@@ -1,6 +1,3 @@
-(load-file "~/.emacs.d/themes/hello.el")
-
-
 
 ;;=================definitions=================
 (defun pkg-init ()
@@ -130,6 +127,7 @@
   (add-hook 'haskell-mode-hook 'add-pretty-lambda))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
+  (load-theme 'hello t)
   (evil-set-initial-state 'ibuffer-mode 'normal) 
   (evil-set-initial-state 'bookmark-bmenu-mode 'normal) 
   (ac-config-default)
@@ -149,7 +147,7 @@
 ;;=================init=================
 (pkg-init)
 (install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets tablist))
-(custom)
+;;(custom)
 (keys)
 (graphics)
 (hooks)
@@ -158,45 +156,3 @@
 
 ;;=================load hydras=================
 (load-file "./.emacs.d/hydras/hydras.el")
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#484e54" "#f11235" "#02d849" "#ffb627" "#00a6fb" "#e834f9" "#1de9b6" "#f8f8f2"])
- '(custom-enabled-themes nil)
- '(custom-safe-themes
-   (quote
-    ("e4b0b3402412fa850ae8575e761a5f8b02a1c108fb2359ab4f4977537bb64531" "2679db166117d5b26b22a8f12a940f5ac415d76b004de03fcd34483505705f62" "8ca8fbaeaeff06ac803d7c42de1430b9765d22a439efc45b5ac572c2d9d09b16" default)))
- '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . "#e834f9")
-     ("NEXT" . "#e834f9")
-     ("THEM" . "#0ed1d1")
-     ("PROG" . "#1de9b6")
-     ("OKAY" . "#00a6fb")
-     ("DONT" . "#ff9505")
-     ("FAIL" . "#f11235")
-     ("DONE" . "#02d849")
-     ("NOTE" . "#ffb627")
-     ("KLUDGE" . "#fb6107")
-     ("HACK" . "#a359fe")
-     ("TEMP" . "#c0c0bd")
-     ("FIXME" . "#e834f9")
-     ("XXX" . "#0ed1d1")
-     ("XXXX" . "#0ed1d1")
-     ("\\?\\?\\?+" . "#0ed1d1"))))
- '(package-selected-packages
-   (quote
-    (haskell-emacs typescript-mode humanoid-themes linum-relative evil)))
- '(pdf-view-midnight-colors (quote ("#f8f8f2" . "#232629"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

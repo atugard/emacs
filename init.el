@@ -70,7 +70,7 @@
        ("\\?\\?\\?+" . "#0ed1d1"))))
    '(package-selected-packages
      (quote
-      (typescript-mode humanoid-themes linum-relative evil)))
+      (humanoid-themes linum-relative evil)))
    '(pdf-view-midnight-colors (quote ("#f8f8f2" . "#232629"))))
   (custom-set-faces))
 
@@ -127,7 +127,6 @@
   (add-hook 'haskell-mode-hook 'add-pretty-lambda))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
-  (load-theme 'hello t)
   (evil-set-initial-state 'ibuffer-mode 'normal) 
   (evil-set-initial-state 'bookmark-bmenu-mode 'normal) 
   (ac-config-default)
@@ -142,11 +141,19 @@
   (desktop-save-mode 1)
   ;;Scroll one line at a time
   (setq scroll-step 1)
-  (global-prettify-symbols-mode 1))
+  (global-prettify-symbols-mode 1)
+  (let ((basedir "~/.emacs.d/themes/"))
+      (dolist (f (directory-files basedir))
+        (if (and (not (or (equal f ".") (equal f "..")))
+                 (file-directory-p (concat basedir f)))
+            (add-to-list 'custom-theme-load-path (concat basedir f)))))
+
+  (load-theme 'hello t)
+  )
 
 ;;=================init=================
 (pkg-init)
-(install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode typescript-mode org-bullets tablist))
+(install-packages '(haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode org-bullets tablist))
 ;;(custom)
 (keys)
 (graphics)
@@ -156,3 +163,16 @@
 
 ;;=================load hydras=================
 (load-file "./.emacs.d/hydras/hydras.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("c30b896176fc5e33cb5d6e2bb63faeeb1ef64ce5e4d30bc65f17c78415eae0ac" "e4b0b3402412fa850ae8575e761a5f8b02a1c108fb2359ab4f4977537bb64531" "c6c47de581524f53ad7b0ee2b42a245811fdfc82d549b98fef0615e69746a29a" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

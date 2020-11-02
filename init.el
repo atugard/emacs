@@ -91,8 +91,16 @@
   (add-hook 'racket-mode-hook 'add-pretty-lambda)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'add-pretty-lambda))
+
+(defun base-theme ()
+  (let ((basedir "~/.emacs.d/themes/"))
+    (dolist (f (directory-files basedir))
+      (if (and (not (or (equal f ".") (equal f "..")))
+	       (file-directory-p (concat basedir f)))
+	  (add-to-list 'custom-theme-load-path (concat basedir f))))))
 (defun misc-options ()
   (setq inhibit-startup-screen t)
+  (evil-mode 1)
   (evil-set-initial-state 'ibuffer-mode 'normal) 
   (evil-set-initial-state 'bookmark-bmenu-mode 'normal) 
   (ac-config-default)
@@ -107,47 +115,21 @@
   ;;Scroll one line at a time
   (setq scroll-step 1)
   (global-prettify-symbols-mode 1)
-  (let ((basedir "~/.emacs.d/themes/"))
-    (dolist (f (directory-files basedir))
-      (if (and (not (or (equal f ".") (equal f "..")))
-	       (file-directory-p (concat basedir f)))
-	  (add-to-list 'custom-theme-load-path (concat basedir f)))))
-
   (load-theme 'hello t)
   )
 
 ;;=================init=================
 (pkg-init)
 (install-packages '(rjsx-mode magit sass-mode typescript-mode haskell-mode racket-mode evil helm projectile ibuffer-projectile ag ggtags auto-complete hydra js2-mode org-bullets tablist))
-;;(custom)
 (keys)
 (graphics)
 (hooks)
 (linum-init)
+(base-theme)
 (misc-options)
 
 ;;=================load hydras=================
 (load-file "./.emacs.d/hydras/hydras.el")
-
-
-
-;;=================performance=================
-;;; timestamps in *Messages*                                                    
-(defun current-time-microseconds ()
-  (let* ((nowtime (current-time))
-         (now-ms (nth 2 nowtime)))
-    (concat (format-time-string "[%Y-%m-%dT%T" nowtime) (format ".%d] " now-ms))))
-
-(defadvice message (before test-symbol activate)
-  (if (not (string-equal (ad-get-arg 0) "%s%s"))
-      (let ((deactivate-mark nil)
-	    (inhibit-read-only t))
-	(save-excursion
-          (set-buffer "*Messages*")
-          (goto-char (point-max))
-          (if (not (bolp))
-              (newline))
-          (insert (current-time-microseconds))))))
 
 
 
